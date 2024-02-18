@@ -1,16 +1,11 @@
 // output: computer had one of  the three powers
 function getComputerChoice(){
-    return choiceRandomForComputer()
-}
-
-// output: random number and assign one of the powers
-function choiceRandomForComputer(){
-    let num = Math.floor(Math.random()*10)
-    if(num < 3){
+    let num = Math.floor(Math.random()*3)
+    if(num == 0){
         return 'rock'
-    } else if(num >= 3 && num <= 6){
+    } else if(num == 1){
         return 'paper'
-    } else if(num > 7){
+    } else if(num == 2){
         return 'scissors'
     }
 }
@@ -19,63 +14,37 @@ function choiceRandomForComputer(){
 function getUserChoice(){
     let userChoice = prompt("Choose your power: rock, paper, scissors");
 
-    return userChoice.toLocaleLowerCase();
+    return userChoice.toLowerCase();
 }
 
 // Play a single round 
-function playRound(playerSelection, computerSelection){
+function playRound(){
     computerSelection = getComputerChoice();
     playerSelection = getUserChoice();
 
     let roundResult;
 
-    switch(playerSelection === 'rock'){
-        case(computerSelection ==='paper'):
-            roundResult = 'You lose! ' + computerSelection + ' beat ' + playerSelection;
-            break;
+    if(playerSelection == 'paper' && computerSelection == 'paper' 
+    || playerSelection == 'rock' && computerSelection == 'rock' 
+    || playerSelection == 'scissors' && computerSelection == 'scissors'){
+        return roundResult = 'This\'s draw ' + playerSelection + " equal " + computerSelection;
 
-        case(computerSelection === 'scissors'):
-            roundResult = 'You win! ' + computerSelection + ' defeat ' + playerSelection;
-            break;
+    } else if(playerSelection == 'paper' && computerSelection == 'scissors' 
+    || playerSelection == 'scissors' && computerSelection == 'rock' 
+    || playerSelection == 'rock' && computerSelection == 'paper'){
+        return roundResult = 'You lose! ' + playerSelection + ' defeat ' + computerSelection;
 
-        case(computerSelection === 'rock'):
-            roundResult = 'That\'s draw! ' + computerSelection + ' equal ' + playerSelection;
-            break;
+    } else if(playerSelection == 'paper' && computerSelection == 'rock' 
+    || playerSelection == 'rock' && computerSelection == 'scissors' 
+    || playerSelection == 'scissors' && computerSelection == 'paper'){
+        return roundResult = 'You win! ' + playerSelection + ' beat ' + computerSelection; 
+    } else{
+        return roundResult = "You lose without powerssssssssss"
     }
-
-    switch(playerSelection === 'paper'){
-        case(computerSelection === 'scissors'):
-            roundResult = 'You lose! ' + computerSelection + ' beat ' + playerSelection;
-            break;
-
-        case(computerSelection === 'rock'):
-            roundResult = 'You win! ' + computerSelection + ' defeat ' + playerSelection;
-            break;
-
-        case(computerSelection === 'paper'):
-            roundResult = 'That\'s draw! ' + computerSelection + ' equal ' + playerSelection;
-            break;
-    }
-
-    switch(playerSelection === 'scissors'){
-        case(computerSelection === 'rock'):
-            roundResult = 'You lose! ' + computerSelection + ' beat ' + playerSelection;
-            break;
-
-        case(computerSelection === 'rock'):
-            roundResult = 'You win! ' + computerSelection + ' defeat ' + playerSelection;
-            break;
-
-        case(computerSelection === 'scissors'):
-            roundResult = 'That\'s draw! ' + computerSelection + ' equal ' + playerSelection;
-            break;
-    }
-
-    return roundResult;
 }
 
 function playGame(){
-    for(let i = 0; i < 5; i++){
+    for(let i = 0; i < 3; i++){
         console.log(playRound())
     }
 
